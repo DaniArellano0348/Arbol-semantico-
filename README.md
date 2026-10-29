@@ -45,6 +45,11 @@ Sirve la carpeta desde el directorio del proyecto con Python 3 y abre `http://lo
 
 ```sh
 python3 -m http.server 8000
+```
+
+En otra terminal, ejecuta las pruebas:
+
+```sh
 node --test engine.test.mjs
 ```
 
