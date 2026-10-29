@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f6ef">
+    <meta name="description" content="Motor de inferencia proposicional con tableaux semánticos.">
+    <title>Motor de inferencia | Árboles semánticos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="app.mjs"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="Motor de inferencia, inicio">
+        <span class="brand-mark" aria-hidden="true">∴</span>
+        <span>Laboratorio de lógica</span>
+      </a>
+      <span class="topbar-note">Lógica proposicional · Método de tableaux</span>
+    </header>
+
+    <main id="inicio">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">LÓGICA I <span></span> SISTEMAS EXPERTOS</p>
+        <h1 id="page-title">Motor de inferencia <em>—</em><br>Árboles semánticos</h1>
+        <p class="intro-copy">Escribe una base de conocimiento. El motor analizará sus proposiciones, construirá el tableau y buscará modelos que satisfagan todas las reglas.</p>
+      </section>
+
+      <section class="input-section" aria-labelledby="input-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / ENTRADA</p>
+            <h2 id="input-title">Base de conocimiento</h2>
+          </div>
+          <span class="input-hint">Una regla por línea</span>
+        </div>
+        <label class="visually-hidden" for="rules-input">Reglas expresadas en español</label>
+        <textarea id="rules-input" spellcheck="false" rows="5" aria-describedby="language-help"></textarea>
+        <div class="input-footer">
+          <p id="language-help">Admite <b>y</b>, <b>o</b>, <b>no</b>, <b>si… entonces</b>, <b>si y solo si</b> y paréntesis.</p>
+          <div class="actions">
+            <button id="example-button" class="button button-quiet" type="button">Cargar ejemplo</button>
+            <button id="clear-button" class="button button-quiet" type="button">Limpiar</button>
+            <button id="analyze-button" class="button button-primary" type="button"><span aria-hidden="true">↗</span> Analizar y construir árbol</button>
+          </div>
+        </div>
+        <p id="error-message" class="error-message" role="alert" hidden></p>
+      </section>
+
+      <section id="results" class="results" aria-live="polite" hidden>
+        <section class="summary-band" aria-labelledby="result-title">
+          <div class="result-stamp" id="result-stamp" aria-hidden="true"></div>
+          <div class="result-copy">
+            <p class="eyebrow">RESULTADO DEL ANÁLISIS</p>
+            <h2 id="result-title"></h2>
+            <p id="result-description"></p>
+          </div>
+          <div class="branch-counts" id="branch-counts"></div>
+        </section>
+
+        <div class="reference-grid">
+          <section class="data-section" aria-labelledby="formulas-title">
+            <div class="section-heading compact-heading">
+              <div><p class="eyebrow">02 / FORMALIZACIÓN</p><h2 id="formulas-title">Reglas y fórmulas</h2></div>
+            </div>
+            <div id="formulas-output" class="formula-list"></div>
+          </section>
+          <section class="data-section" aria-labelledby="atoms-title">
+            <div class="section-heading compact-heading">
+              <div><p class="eyebrow">03 / VOCABULARIO</p><h2 id="atoms-title">Proposiciones atómicas</h2></div>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Letra</th><th scope="col">Significado</th></tr></thead>
+                <tbody id="atoms-output"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <section class="tree-section" aria-labelledby="tree-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">04 / EXPANSIÓN</p><h2 id="tree-title">Árbol semántico</h2></div>
+            <div class="tree-controls" aria-label="Controles del árbol">
+              <button id="zoom-out" type="button" title="Reducir árbol" aria-label="Reducir árbol">−</button>
+              <output id="zoom-value" for="zoom-out zoom-in">100%</output>
+              <button id="zoom-in" type="button" title="Ampliar árbol" aria-label="Ampliar árbol">+</button>
+              <button id="zoom-reset" class="reset-zoom" type="button" title="Restablecer tamaño">Restablecer</button>
+            </div>
+          </div>
+          <p class="tree-key"><span class="key-mark key-open"></span> Rama abierta <span class="key-mark key-closed"></span> Rama cerrada <span class="key-applied">Aplicada</span> Fórmula expandida</p>
+          <div id="tree-viewport" class="tree-viewport" tabindex="0" aria-label="Árbol semántico; usa desplazamiento horizontal y vertical para recorrerlo">
+            <div id="tree-canvas" class="tree-canvas"></div>
+          </div>
+        </section>
+
+        <section class="outcomes-section" aria-labelledby="outcomes-title">
+          <div class="section-heading compact-heading">
+            <div><p class="eyebrow">05 / INTERPRETACIÓN</p><h2 id="outcomes-title">Ramas y modelos</h2></div>
+          </div>
+          <div id="outcomes-output" class="outcomes-grid"></div>
+        </section>
+      </section>
+
+      <footer class="page-footer">
+        <span>Tableaux para lógica proposicional clásica</span>
+        <span>El análisis se ejecuta localmente en tu navegador</span>
+      </footer>
+    </main>
+  </body>
+</html>
